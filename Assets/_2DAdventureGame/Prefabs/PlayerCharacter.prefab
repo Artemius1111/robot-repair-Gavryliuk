@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2149436867582449121}
   - component: {fileID: 784487054505205433}
   - component: {fileID: 2571465749009333087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0067c04a5f75d5a46b7a0c4d753c3ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 4
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -203,6 +202,29 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
+    m_Flags: 0
+    m_Priority: 0
+  speed: 4
+  maxHealth: 5
+  timeInvincible: 2
+  projectilePrefab: {fileID: 8968306194364563550, guid: de26167019488c74fa44fe7a2c0724a9,
+    type: 3}
+  LaunchAction:
+    m_Name: Launch
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 2c8d581f-b133-481b-80d6-3a59665f373c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 96e58e91-7d9b-4e9b-8e8f-a08622c93d50
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
     m_Flags: 0
     m_Priority: 0
 --- !u!50 &784487054505205433
