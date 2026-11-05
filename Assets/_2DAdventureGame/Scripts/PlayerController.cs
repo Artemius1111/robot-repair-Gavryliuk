@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     public float timeBetweenShots = 0.6f;
 
+    [Header("Talk Settings")]
+    public InputAction TalkAction = new InputAction("Talk", InputActionType.Button, "<Keyboard>/x");
+
     private int currentHealth;
     private bool isInvincible;
     private float invincibleTimer;
@@ -27,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private float shotTimer;
 
+    private NonPlayerCharacter lastNonPlayerCharacter;
+
     public int health => currentHealth;
 
     private void Awake()
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        TalkAction.Enable();
     }
 
     private void Update()
@@ -80,6 +86,28 @@ public class PlayerController : MonoBehaviour
             if (invincibleTimer <= 0)
                 isInvincible = false;
         }
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            rigidbody2d.position + Vector2.up * 0.2f,
+            lookDirection, 1.5f, LayerMask.GetMask("NPC"));
+        if (hit.collider != null)
+        {
+            NonPlayerCharacter npc = hit.collider.GetComponent<NonPlayerCharacter>();
+            if (npc != null)
+            {
+                npc.dialogueBubble.SetActive(true);
+                lastNonPlayerCharacter = npc;
+                FindFriend();
+            }
+        }
+        else
+        {
+            if (lastNonPlayerCharacter != null)
+            {
+                lastNonPlayerCharacter.dialogueBubble.SetActive(false);
+                lastNonPlayerCharacter = null;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -104,7 +132,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log("Поточне здоров'я: " + currentHealth + "/" + maxHealth);
+        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
 
     private void Launch()
@@ -119,5 +147,13 @@ public class PlayerController : MonoBehaviour
         projectile.Launch(lookDirection, 300);
 
         animator.SetTrigger("Launch");
+    }
+
+    private void FindFriend()
+    {
+        if (TalkAction.WasPressedThisFrame())
+        {
+            UIHandler.instance.DisplayDialogue();
+        }
     }
 }

@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     float timer;
     int direction = 1;
     bool broken = true;
+    public bool isBroken { get { return broken; } }
 
     void Start()
     {
@@ -68,5 +69,6 @@ public class EnemyController : MonoBehaviour
         broken = false;
         rigidbody2d.simulated = false;
         animator.SetTrigger("Fixed");
+        UIHandler.instance.UpdateFixedCounter();
     }
 }

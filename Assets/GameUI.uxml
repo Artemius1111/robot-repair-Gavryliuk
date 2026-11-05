@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="NPCDialogue" src="NPCDialogue.uxml" />
+    <ui:Template name="EndScreen" src="EndScreen.uxml" />
+    <ui:VisualElement name="HealthBarBackground" style="flex-grow: 0; width: 484px; height: 231px; background-image: url(&quot;/Assets/_2DAdventureGame/Art/Ducko/UI/UIHealthFrame.png&quot;); -unity-background-scale-mode: scale-to-fit;">
+        <ui:VisualElement name="HealthBarContainer" style="flex-grow: 1; position: absolute; top: 31.5%; left: 41.6%; width: 54.6%; height: 31.5%;">
+            <ui:VisualElement name="HealthBar" style="flex-grow: 1; width: 100%; height: 100%; background-image: url(&quot;/Assets/_2DAdventureGame/Art/Ducko/UI/UIHealthBar.png&quot;); -unity-background-scale-mode: stretch-to-fill;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="CharacterPortrait" style="flex-grow: 1; position: absolute; top: 7.3%; left: 1.7%; width: 37.3%; height: 81.8%; background-image: url(&quot;/Assets/_2DAdventureGame/Art/Ducko/UI/CharacterPortrait.png&quot;); -unity-background-scale-mode: scale-to-fit;" />
+    </ui:VisualElement>
+    <ui:Label name="FixedCounter" text="Полагоджено 0 / 0" style="position: absolute; top: 2%; right: 2%; font-size: 52px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+    <ui:Instance template="NPCDialogue" name="NPCDialogue" style="position: absolute; top: 70%; right: 10%; bottom: 0; left: 10%;" />
+    <ui:Instance template="EndScreen" name="EndScreen" picking-mode="Ignore" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
+</ui:UXML>
